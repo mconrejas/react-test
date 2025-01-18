@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export interface Address {
   address: string;
@@ -38,7 +38,7 @@ interface UserState {
 const initialState: UserState = {
   users: [],
   filteredUsers: [],
-  searchTerm: "",
+  searchTerm: '',
   currentPage: 1,
   totalPages: 1,
   loading: false,
@@ -47,9 +47,17 @@ const initialState: UserState = {
 
 // Fetch users from DummyJSON
 export const fetchUsers = createAsyncThunk(
-  "users/fetchUsers",
-  async ({ page, limit = 10, searchTerm = '' }: { page: number; limit?: number; searchTerm?: string }) => {
-    const query = searchTerm ? `/search?q=${searchTerm}&` : "?";
+  'users/fetchUsers',
+  async ({
+    page,
+    limit = 10,
+    searchTerm = '',
+  }: {
+    page: number;
+    limit?: number;
+    searchTerm?: string;
+  }) => {
+    const query = searchTerm ? `/search?q=${searchTerm}&` : '?';
     const response = await axios.get(
       `https://dummyjson.com/users${query}limit=${limit}&skip=${(page - 1) * limit}&sortBy=firstName&order=asc`
     );
@@ -61,9 +69,8 @@ export const fetchUsers = createAsyncThunk(
   }
 );
 
-
 const userSlice = createSlice({
-  name: "users",
+  name: 'users',
   initialState,
   reducers: {
     setSearchTerm: (state, action: PayloadAction<string>) => {
@@ -89,7 +96,7 @@ const userSlice = createSlice({
       })
       .addCase(fetchUsers.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Something went wrong";
+        state.error = action.error.message || 'Something went wrong';
       });
   },
 });

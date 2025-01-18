@@ -1,50 +1,47 @@
-# React + TypeScript + Vite
+# ReactJS Test 🧑‍💻📂
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A React-based application that displays a list of users, allows users to view detailed information, and includes features like searching, card expansion animations, lazy loading, and data fetching with spinners.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 **Features**
 
-## Expanding the ESLint configuration
+- 📜 **List Users**: View a paginated list of users with essential details like name, email, and company.
+- 🔍 **Search Functionality**: Search for users by name to quickly find specific records.
+- 📋 **User Details**: Click on a user card to expand it and view additional details.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+---
 
-- Configure the top-level `parserOptions` property like this:
+## 🛠️ **Technologies Used**
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **React**: Frontend framework for building user interfaces.
+- **TypeScript**: For type safety and better developer experience.
+- **Redux Toolkit**: State management for handling global application state.
+- **Tailwind CSS**: Utility-first CSS framework for styling.
+- **DummyJSON API**: Used to fetch user data.
+- **Vite**: Lightning-fast development build tool.
+- **ESLint** & **Prettier**: For code quality and formatting.
+
+---
+
+## 📦 **Installation**
+
+Follow these steps to set up the project locally:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/mconrejas/react-test.git
+cd react-test
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+### 2. Install Dependencies
+Make sure you have Node.js installed, then run:
+```bash
+npm install
+```
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+### 3. Start the Development Server
+Run the following command to start the app:
+```bash
+npm run dev
 ```

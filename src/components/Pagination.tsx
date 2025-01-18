@@ -1,12 +1,14 @@
-import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { RootState } from "../redux/store";
-import { setPage } from "../redux/userSlice";
-import { throttle } from "lodash";
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store';
+import { setPage } from '../redux/userSlice';
+import { throttle } from 'lodash';
 
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();
-  const { currentPage, totalPages } = useSelector((state: RootState) => state.users);
+  const { currentPage, totalPages } = useSelector(
+    (state: RootState) => state.users
+  );
   const maxVisiblePages = 10;
 
   // Throttled Page Change Handler
@@ -49,7 +51,9 @@ const Pagination: React.FC = () => {
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={`px-4 py-2 border rounded-md ${
-          currentPage === 1 ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-white"
+          currentPage === 1
+            ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+            : 'bg-white'
         }`}
       >
         Prev
@@ -71,7 +75,7 @@ const Pagination: React.FC = () => {
           key={page}
           onClick={() => handlePageChange(page)}
           className={`px-4 py-2 border rounded-md ${
-            page === currentPage ? "bg-blue-500 text-white" : "bg-white"
+            page === currentPage ? 'bg-blue-500 text-white' : 'bg-white'
           }`}
         >
           {page}
@@ -93,7 +97,9 @@ const Pagination: React.FC = () => {
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
         className={`px-4 py-2 border rounded-md ${
-          currentPage === totalPages ? "bg-gray-200 text-gray-500 cursor-not-allowed" : "bg-white"
+          currentPage === totalPages
+            ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+            : 'bg-white'
         }`}
       >
         Next

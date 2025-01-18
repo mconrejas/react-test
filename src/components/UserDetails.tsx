@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { User } from "../redux/userSlice";
+import React, { useEffect, useState } from 'react';
+import { User } from '../redux/userSlice';
 
 interface UserDetailsProps {
   user: User;
@@ -15,11 +15,11 @@ const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
     };
 
     // Attach a global click listener
-    window.addEventListener("click", handlePageClick);
+    window.addEventListener('click', handlePageClick);
 
     // Cleanup the event listener on component unmount
     return () => {
-      window.removeEventListener("click", handlePageClick);
+      window.removeEventListener('click', handlePageClick);
     };
   }, []);
 
@@ -28,14 +28,13 @@ const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
     e.stopPropagation();
     setIsExpanded((prev) => !prev);
   };
-  
 
   return (
     <div className="relative w-full h-[143px]">
       <div
         key={user.id}
         className={`p-6 bg-white rounded-md shadow-md cursor-pointer hover:shadow-lg w-full absolute card flex ${
-          isExpanded ? "expanded" : ""
+          isExpanded ? 'expanded' : ''
         }`}
         onClick={toggleExpand}
       >
@@ -44,12 +43,25 @@ const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
           <h3 className="text-xl font-bold mb-2">
             {user.firstName} {user.lastName}
           </h3>
-          <p className="text-sm text-gray-600"><strong>Email:</strong> {user.email}</p>
-          <p className="text-sm text-gray-600"><strong>Phone:</strong> {user.phone}</p>
-          <p className="text-sm text-gray-600"><strong>Company:</strong> {user.company.name}</p>
-          <p className="text-sm text-gray-600"><strong>Department:</strong> {user.company.department}</p>
-          <p className="text-sm text-gray-600"><strong>Title:</strong> {user.company.title}</p>
-          <p className="text-sm text-gray-600"><strong>Address:</strong> {user.company.address?.address},{" "}{user.company.address?.city}</p>
+          <p className="text-sm text-gray-600">
+            <strong>Email:</strong> {user.email}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Phone:</strong> {user.phone}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Company:</strong> {user.company.name}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Department:</strong> {user.company.department}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Title:</strong> {user.company.title}
+          </p>
+          <p className="text-sm text-gray-600">
+            <strong>Address:</strong> {user.company.address?.address},{' '}
+            {user.company.address?.city}
+          </p>
         </div>
 
         {/* Close Button */}
@@ -63,7 +75,7 @@ const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
         )}
       </div>
     </div>
-  )
+  );
 };
 
 export default UserDetails;

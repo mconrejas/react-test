@@ -1,5 +1,5 @@
-import { configureStore } from "@reduxjs/toolkit";
-import userReducer from "./userSlice";
+import { configureStore } from '@reduxjs/toolkit';
+import userReducer from './userSlice';
 
 // Configure Redux store with userReducer and optional middleware
 const store = configureStore({
@@ -7,7 +7,7 @@ const store = configureStore({
     users: userReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(), // Optional: Customize middleware
-  devTools: process.env.NODE_ENV !== "production",
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
