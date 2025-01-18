@@ -2,23 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.collapsed-card {
-  width: 100%; /* Default card size */
-  height: auto;
-  position: static; /* Default positioning */
-  transition: all 0.5s ease-in-out; /* Smooth transition for size and origin */
+.card {
+  transition: all 0.5s ease-in-out;
+  height: 143px; /* Collapsed size */
   z-index: 0;
 }
 
-.expanded-card {
-  width: 300px; /* Expanded width */
-  height: 300px; /* Expanded height */
-  position: absolute; /* Take the card out of the grid flow */
+.expanded {
+  height: 205px; /* Expanded size */
   z-index: 50;
-  top: 50%; /* Center vertically */
-  left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Adjust for centering */
-  transition: all 0.5s ease-in-out; /* Smooth transition for growth */
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Enhanced shadow */
 }
-

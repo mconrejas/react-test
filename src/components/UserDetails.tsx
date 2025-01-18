@@ -1,56 +1,69 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "../redux/userSlice";
 
 interface UserDetailsProps {
-  user: User | null;
-  onClose: () => void;
+  user: User;
 }
 
-const UserDetails: React.FC<UserDetailsProps> = ({ user, onClose }) => {
-  if (!user) return null;
+const UserDetails: React.FC<UserDetailsProps> = ({ user }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Expand the card when clicking anywhere on the page
+  useEffect(() => {
+    const handlePageClick = () => {
+      setIsExpanded(false); // Always set to true when clicking outside
+    };
+
+    // Attach a global click listener
+    window.addEventListener("click", handlePageClick);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener("click", handlePageClick);
+    };
+  }, []);
+
+  // Toggles the expansion state (when clicking inside the card)
+  const toggleExpand = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
+    setIsExpanded((prev) => !prev);
+  };
+  
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="relative w-full h-[143px]">
       <div
-        className="bg-white w-full max-w-2xl rounded-md shadow-lg p-6 relative transform transition-all duration-500 scale-100 opacity-100"
-        style={{
-          animation: "fadeIn 0.5s ease-in-out",
-        }}
+        key={user.id}
+        className={`p-6 bg-white rounded-md shadow-md cursor-pointer hover:shadow-lg w-full absolute card flex ${
+          isExpanded ? "expanded" : ""
+        }`}
+        onClick={toggleExpand}
       >
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-2 right-2 text-red-500 font-bold text-lg"
-        >
-          ✖
-        </button>
+        <div className="w-full overflow-hidden">
+          {/* Card Content */}
+          <h3 className="text-xl font-bold mb-2">
+            {user.firstName} {user.lastName}
+          </h3>
+          <p className="text-sm text-gray-600"><strong>Email:</strong> {user.email}</p>
+          <p className="text-sm text-gray-600"><strong>Phone:</strong> {user.phone}</p>
+          <p className="text-sm text-gray-600"><strong>Company:</strong> {user.company.name}</p>
+          <p className="text-sm text-gray-600"><strong>Department:</strong> {user.company.department}</p>
+          <p className="text-sm text-gray-600"><strong>Title:</strong> {user.company.title}</p>
+          <p className="text-sm text-gray-600"><strong>Address:</strong> {user.company.address?.address},{" "}{user.company.address?.city}</p>
+        </div>
 
-        {/* User Details */}
-        <h1 className="text-2xl font-bold mb-4">
-          {user.firstName} {user.lastName}
-        </h1>
-        <p className="mb-2">
-          <strong>Email:</strong> {user.email}
-        </p>
-        <p className="mb-2">
-          <strong>Phone:</strong> {user.phone}
-        </p>
-        <p className="mb-2">
-          <strong>Company:</strong> {user.company.name}
-        </p>
-        <p className="mb-2">
-          <strong>Department:</strong> {user.company.department}
-        </p>
-        <p className="mb-2">
-          <strong>Title:</strong> {user.company.title}
-        </p>
-        <p className="mb-2">
-          <strong>Address:</strong> {user.company.address?.address},{" "}
-          {user.company.address?.city}
-        </p>
+        {/* Close Button */}
+        {isExpanded && (
+          <button
+            onClick={toggleExpand}
+            className="absolute top-2 right-2 text-red-500 font-bold text-lg"
+          >
+            ✖
+          </button>
+        )}
       </div>
     </div>
-  );
+  )
 };
 
 export default UserDetails;

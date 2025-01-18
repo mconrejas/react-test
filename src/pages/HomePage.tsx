@@ -8,7 +8,7 @@ import { debounce } from "lodash";
 
 const HomePage: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { currentPage, loading, searchTerm } = useAppSelector((state) => state.users);
+  const { currentPage, searchTerm } = useAppSelector((state) => state.users);
 
   // Debounced API Call
   const debouncedFetchUsers = useMemo(
@@ -37,10 +37,7 @@ const HomePage: React.FC = () => {
       <SearchBar />
 
       {/* User List */}
-      <UserList />      
-
-      {/* Loading Indicator */}
-      {loading && <p className="text-center mt-4 text-gray-500">Loading...</p>}
+      <UserList />
 
       {/* Pagination Component */}
       <Pagination />
